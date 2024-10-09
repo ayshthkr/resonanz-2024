@@ -42,7 +42,7 @@ function Loading() {
     <section
       id="container"
       className={`h-screen w-full relative bg-cover bg-repeat overflow-hidden`}
-      style={{ backgroundImage: "url('/StarsBG.png')" }}
+      style={{ backgroundImage: "url('/starbg.png')" }}
     >
       <div
         className={`absolute h-full w-full z-10 transition-all duration-1000 ease-in-out flex justify-center items-center transform
@@ -50,7 +50,7 @@ function Loading() {
         `}
       >
         <img
-          src="/Globe.png"
+          src="/globe.png"
           alt="Globe"
           className="transition-all duration-1000 ease-in-out object-cover animate-spin-slow max-h-screen w-auto"
         />
@@ -72,7 +72,7 @@ function Loading() {
           />
         </div>
         <img
-          src="/ResoLogo.png"
+          src="/resologo.png"
           alt="Logo"
           className={`max-w-[80vw] object-contain lg:max-w-full max-h-full transition-all duration-1000 ease-in-out transform
             ${animateLogo ? "scale-50" : "scale-100"}
