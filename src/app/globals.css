@@ -5,3 +5,19 @@
 body {
   background-color: black;
 }
+
+.text-outline {
+  -webkit-text-stroke: 2px white;
+  /* Defines the stroke width and color */
+  color: transparent;
+  /* Makes the text fill transparent */
+  transition: color 0.3s ease;
+  /* Smooth transition when color changes */
+}
+
+.text-outline:hover {
+  color: white;
+  /* Solid white on hover */
+  -webkit-text-stroke: 0;
+  /* Remove the outline on hover */
+}
