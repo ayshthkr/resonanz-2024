@@ -1,5 +1,6 @@
 import AboutUs from "@/components/AboutUs";
 import FadeDiv from "@/components/FadeDiv";
+import FAQ from "@/components/faq";
 import Gallery from "@/components/Gallery";
 import Loading from "@/components/loading";
 import SponsorsSection from "@/components/Sponsors/SponsorsSection";
@@ -19,6 +20,7 @@ export default function page() {
       <AboutUs /> 
       <SponsorsSection sponsors={sponsors} />
       <Gallery/>
+      <FAQ />
     </main>
   );
 }
