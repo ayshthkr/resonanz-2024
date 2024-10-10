@@ -14,9 +14,9 @@ export default function SponsorsSection({
 }) {
   return (
     <>
-      <div className="text-white mx-auto flex flex-col items-center md:items-start justify-center md:justify-start pt-8 md:pt-16 px-4 sm:px-8 md:px-16">
+      <div className={`text-white mx-auto flex flex-col items-center md:items-start justify-center md:justify-start pt-8 md:pt-16 px-4 sm:px-8 md:px-16 ${actor.className}`}>
         <TextRevealEffect>
-          <h2 className="text-6xl md:text-[95px] text-white text-center md:text-left font-[400] font-tungsten md:leading-[115.2px]">
+          <h2 className="text-6xl md:text-[95px] text-white text-center md:text-left font-[400] uppercase font-tungsten md:leading-[115.2px]">
             Our Sponsors
           </h2>
         </TextRevealEffect>
