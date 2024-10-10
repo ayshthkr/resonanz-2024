@@ -7,7 +7,11 @@ const actor = Actor({
   weight: "400",
 });
 
-export default function SponsorsSection() {
+export default function SponsorsSection({
+  sponsors,
+}: {
+  sponsors: string[][];
+}) {
   return (
     <>
       <div className="text-white mx-auto flex flex-col items-center md:items-start justify-center md:justify-start pt-8 md:pt-16 px-4 sm:px-8 md:px-16">
@@ -24,7 +28,7 @@ export default function SponsorsSection() {
           </TextRevealEffect>
         </div>
       </div>
-      <SponsorMarqueeBox />
+      <SponsorMarqueeBox sponsors={sponsors} />
     </>
   );
 }

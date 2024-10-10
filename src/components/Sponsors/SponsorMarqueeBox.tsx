@@ -6,26 +6,20 @@ const inter = Inter({
   weight: "800",
 });
 
-export default function SponsorMarqueeBox() {
-     
-
+export default function SponsorMarqueeBox({
+  sponsors,
+}: {
+  sponsors: string[][];
+}) {
   return (
     <div className="mt-4">
-      <Effect pauseOnHover>
-        {Array.from({ length: 5 }).map((_, index) => (
-          <SponsorItem key={index} text="Sponsor." />
-        ))}
-      </Effect>
-      <Effect reverse pauseOnHover>
-        {Array.from({ length: 5 }).map((_, index) => (
-          <SponsorItem key={index} text="Sponsor." />
-        ))}
-      </Effect>
-      <Effect pauseOnHover>
-        {Array.from({ length: 5 }).map((_, index) => (
-          <SponsorItem key={index} text="Sponsor." />
-        ))}
-      </Effect>
+      {sponsors.map((sponsor, i) => (
+        <Effect pauseOnHover={i % 2 == 0} key={i}>
+          {sponsor.map((item, index) => (
+            <SponsorItem key={index} text={item} />
+          ))}
+        </Effect>
+      ))}
     </div>
   );
 }
