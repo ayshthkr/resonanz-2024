@@ -26,7 +26,7 @@ export default function SponsorMarqueeBox({
 
 function SponsorItem({ text }: { text: string }) {
   return (
-    <span className="text-outline text-6xl md:text-[170px] md:leading-[204px] font-[800] font-inter">
+    <span className={`text-outline text-6xl md:text-[170px] md:leading-[204px] font-[800] ${inter.className}`}>
       {text}
     </span>
   );
