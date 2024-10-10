@@ -17,7 +17,7 @@ export default function Navbar({
         className
       )}
     >
-      <div className="w-full p-8 space-x-12 flex items-center justify-between font-tungsten tracking-wide text-2xl uppercase">
+      <div className="w-full p-8 space-x-6 md:space-x-12 flex items-center justify-between font-tungsten tracking-wide text-2xl uppercase">
         <div className="space-x-12 flex">
           <h1>Events</h1>
           <h1>Sponsors</h1>
