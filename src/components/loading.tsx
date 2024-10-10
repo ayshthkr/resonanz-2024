@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import Navbar from "./Navbar";
 
 function Loading() {
   const [animateLogo, setAnimateLogo] = useState(false);
@@ -44,6 +45,7 @@ function Loading() {
       className={`h-screen w-full relative bg-cover bg-repeat overflow-hidden`}
       style={{ backgroundImage: "url('/starbg.png')" }}
     >
+      <Navbar loading={loading} />
       <div
         className={`absolute h-full w-full z-10 transition-all duration-1000 ease-in-out flex justify-center items-center transform
           ${!loading ? "translate-y-96 scale-125" : "-translate-x-[40rem]"}
@@ -52,7 +54,7 @@ function Loading() {
         <img
           src="/globe.png"
           alt="Globe"
-          className="transition-all duration-1000 ease-in-out object-cover animate-spin-slow max-h-screen w-auto"
+          className="transition-all duration-[1000ms] object-cover animate-my-spin-slow max-h-screen w-auto"
         />
       </div>
       <div className="absolute top-0 left-0 h-full w-full bg-black opacity-50 z-20"></div>
@@ -79,21 +81,6 @@ function Loading() {
             ${loading ? "" : "-mt-20"}
           `}
         />
-      </div>
-      <div
-        className={`absolute h-full w-full top-0 left-0 text-white z-50 transition-all duration-1000 ease-in-out 
-          ${loading ? "opacity-0" : "opacity-100"}
-        `}
-      >
-        <div className="w-full p-8 space-x-12 flex items-center justify-between font-tungsten tracking-wide text-2xl uppercase">
-          <div className="space-x-12 flex">
-            <h1>Events</h1>
-            <h1>Sponsors</h1>
-          </div>
-          <div className="justify-end px-6 py-1 rounded-full bg-white text-black">
-            Register
-          </div>
-        </div>
       </div>
     </section>
   );
