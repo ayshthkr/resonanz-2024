@@ -15,14 +15,14 @@ function AboutUs() {
       style={{ background: "url('/aboutus.png')" }}
     >
       <div className="absolute top-0 left-0 h-screen w-screen bg-black/50"></div>
-      <div className="grid grid-cols-2 h-full relative z-20">
-        <div className="relative">
+      <div className="md:grid grid-cols-2 h-full relative z-20">
+        <div className="relative hidden md:block">
           <img
             src="/astronaut.png"
             className="h-[80%] w-auto object-contain absolute top-1/2 -translate-y-1/2"
           />
         </div>
-        <div className="py-6 px-10 flex flex-col items-end">
+        <div className="py-6 px-4 md:px-10 flex flex-col items-center md:items-end">
           <div className="border-b-4 w-fit">
             <TextRevealEffect>
               <h2 className="text-6xl md:text-[95px] text-white text-center md:text-left font-[400] uppercase font-tungsten md:leading-[115.2px]">
@@ -30,7 +30,7 @@ function AboutUs() {
               </h2>
             </TextRevealEffect>
           </div>
-          <p className="text-white text-right py-20 uppercase">
+          <p className="text-white text-sm md:text-base text-center md:text-right py-20 uppercase">
             Design is more than visuals; it's a language that bridges
             functionality and user experience. As technology evolves, so does
             the demand for interfaces that are not only visually appealing but

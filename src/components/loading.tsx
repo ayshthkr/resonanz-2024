@@ -48,7 +48,7 @@ function Loading() {
       <Navbar loading={loading} />
       <div
         className={`absolute h-full w-full z-10 transition-all duration-1000 ease-in-out flex justify-center items-center transform
-          ${!loading ? "translate-y-96 scale-125" : "-translate-x-[40rem]"}
+          ${!loading ? "translate-y-96 scale-125" : "-translate-x-[40rem] hidden md:block"}
         `}
       >
         <img
@@ -77,7 +77,7 @@ function Loading() {
           src="/resologo.png"
           alt="Logo"
           className={`max-w-[80vw] object-contain lg:max-w-full max-h-full transition-all duration-1000 ease-in-out transform
-            ${animateLogo ? "scale-50" : "scale-100"}
+            ${animateLogo ? "scale-100 sm:scale-75 md:scale-50" : "scale-100"}
             ${loading ? "" : "-mt-20"}
           `}
         />
