@@ -1,0 +1,32 @@
+.event-right {
+  transform: translateX(60%) perspective(500px) rotateY(-30deg) scale(1.2);
+  -webkit-transform: translateX(60%) perspective(500px) rotateY(-30deg)
+    scale(1.2);
+  -moz-transform: translateX(60%) perspective(500px) rotateY(-30deg) scale(1.2);
+  -ms-transform: translateX(60%) perspective(500px) rotateY(-30deg) scale(1.2);
+  -o-transform: translateX(60%) perspective(500px) rotateY(-30deg) scale(1.2);
+}
+.event-left {
+  transform: translateX(-160%) perspective(500px) rotateY(30deg) scale(1.2);
+  -webkit-transform: translateX(-160%) perspective(500px) rotateY(30deg)
+    scale(1.2);
+  -moz-transform: translateX(-160%) perspective(500px) rotateY(30deg) scale(1.2);
+  -ms-transform: translateX(-160%) perspective(500px) rotateY(30deg) scale(1.2);
+  -o-transform: translateX(-160%) perspective(500px) rotateY(30deg) scale(1.2);
+}
+.event-right-1 {
+  transform: translateX(250%) perspective(500px) rotateY(-45deg) scale(1.5);
+  -webkit-transform: translateX(250%) perspective(500px) rotateY(-45deg)
+    scale(1.5);
+  -moz-transform: translateX(250%) perspective(500px) rotateY(-45deg) scale(1.5);
+  -ms-transform: translateX(250%) perspective(500px) rotateY(-45deg) scale(1.5);
+  -o-transform: translateX(250%) perspective(500px) rotateY(-45deg) scale(1.5);
+}
+.event-left-1 {
+  transform: translateX(-300%) perspective(500px) rotateY(45deg) scale(1.5);
+  -webkit-transform: translateX(-300%) perspective(500px) rotateY(45deg)
+    scale(1.5);
+  -moz-transform: translateX(-300%) perspective(500px) rotateY(45deg) scale(1.5);
+  -ms-transform: translateX(-300%) perspective(500px) rotateY(45deg) scale(1.5);
+  -o-transform: translateX(-300%) perspective(500px) rotateY(45deg) scale(1.5);
+}
