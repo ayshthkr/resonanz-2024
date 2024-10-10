@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 import React from "react";
 
 export default function Navbar({
@@ -22,9 +23,9 @@ export default function Navbar({
           <h1>Events</h1>
           <h1>Sponsors</h1>
         </div>
-        <div className="justify-end px-6 py-1 rounded-full bg-white text-black">
+        <Link className="justify-end px-6 py-1 rounded-full bg-white text-black" href="/signup">
           Register
-        </div>
+        </Link>
       </div>
     </div>
   );
