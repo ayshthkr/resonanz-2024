@@ -3,6 +3,9 @@ import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useState, useCallback } from "react";
+import { auth } from "@/lib/firebase";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { useRouter } from "next/navigation";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -18,9 +21,14 @@ export default function SIGNIUPForm() {
     type: "error" | "success";
     message: string;
   } | null>(null);
+  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [createUserWithEmailAndPassword] =
+    useCreateUserWithEmailAndPassword(auth);
+  const router = useRouter();
 
   const handleSubmit = useCallback(async () => {
+    setLoading(true);
     // Validate the form
     if (!name || !email || !phone || !password) {
       setMessage({
@@ -69,10 +77,31 @@ export default function SIGNIUPForm() {
       return;
     }
 
-    setMessage({
-      type: "success",
-      message: "Account created successfully",
-    });
+    try {
+      const res = await createUserWithEmailAndPassword(email, password);
+
+      if (res == undefined) {
+        setMessage({
+          type: "error",
+          message: "Account cannot be created",
+        });
+        setLoading(false);
+        return;
+      }
+
+      setEmail("");
+      setPassword("");
+      router.push("/dashboard");
+      return;
+    } catch (e) {
+      console.error(e);
+      setMessage({
+        type: "error",
+        message: "Account cannot be created",
+      });
+      setLoading(false);
+      return;
+    }
   }, [name, email, phone, password]);
 
   return (
@@ -265,9 +294,9 @@ export default function SIGNIUPForm() {
 
         <button
           className="bg-gradient-to-r from-[#501794] to-[#3E70A1] text-white w-full py-4 mt-4 rounded-lg text-lg font-poppins font-[800] transition-all duration-300 hover:opacity-80 active:opacity-100 focus:outline-2 focus:outline-white focus:outline-offset-2 active:outline-none active:scale-95"
-          onClick={handleSubmit}
+          disabled={loading}
         >
-          Sign Up
+          {loading ? <Loader /> : "Sign Up"}
         </button>
         <hr className="mt-4 mb-2 md:mt-8 md:mb-4 border-t border-[#727272]" />
         <p className="text-white text-xs font-poppins font-[700]">
@@ -278,5 +307,70 @@ export default function SIGNIUPForm() {
         </p>
       </div>
     </div>
+  );
+}
+
+function Loader() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 200 200"
+      className="w-full h-[44px]"
+    >
+      <circle
+        fill="#FFFFFF"
+        stroke="#FFFFFF"
+        stroke-width="15"
+        r="15"
+        cx="40"
+        cy="65"
+      >
+        <animate
+          attributeName="cy"
+          calcMode="spline"
+          dur="2"
+          values="65;135;65;"
+          keySplines=".5 0 .5 1;.5 0 .5 1"
+          repeatCount="indefinite"
+          begin="-.4"
+        ></animate>
+      </circle>
+      <circle
+        fill="#FFFFFF"
+        stroke="#FFFFFF"
+        stroke-width="15"
+        r="15"
+        cx="100"
+        cy="65"
+      >
+        <animate
+          attributeName="cy"
+          calcMode="spline"
+          dur="2"
+          values="65;135;65;"
+          keySplines=".5 0 .5 1;.5 0 .5 1"
+          repeatCount="indefinite"
+          begin="-.2"
+        ></animate>
+      </circle>
+      <circle
+        fill="#FFFFFF"
+        stroke="#FFFFFF"
+        stroke-width="15"
+        r="15"
+        cx="160"
+        cy="65"
+      >
+        <animate
+          attributeName="cy"
+          calcMode="spline"
+          dur="2"
+          values="65;135;65;"
+          keySplines=".5 0 .5 1;.5 0 .5 1"
+          repeatCount="indefinite"
+          begin="0"
+        ></animate>
+      </circle>
+    </svg>
   );
 }

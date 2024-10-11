@@ -3,6 +3,9 @@ import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useState, useCallback } from "react";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { auth } from "@/lib/firebase";
+import { useRouter } from "next/navigation";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -16,7 +19,10 @@ export default function SIGNINForm() {
     type: "error" | "success";
     message: string;
   } | null>(null);
+  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
+  const router = useRouter();
 
   const handleSubmit = useCallback(async () => {
     setMessage(null);
@@ -36,20 +42,31 @@ export default function SIGNINForm() {
       });
       return;
     }
-    // // Checking for Password Validation
-    // if (!password || password.length < 6) {
-    //   setMessage({
-    //     type: "error",
-    //     message:
-    //       "Password should be atleast 6 characters long",
-    //   });
-    //   return;
-    // }
+    try {
+      setLoading(true);
+      const res = await signInWithEmailAndPassword(email, password);
+      if (res == undefined) {
+        setMessage({
+          type: "error",
+          message: "Invalid Credentials",
+        });
+        setLoading(false);
+        return;
+      }
+      setEmail("");
+      setPassword("");
 
-    setMessage({
-      type: "success",
-      message: "Successfully logged in",
-    });
+      router.push("/dashboard");
+      return;
+    } catch (e) {
+      console.error(e);
+      setMessage({
+        type: "error",
+        message: "Invalid Credentials",
+      });
+      setLoading(false);
+      return;
+    }
   }, [email, password]);
 
   return (
@@ -177,14 +194,22 @@ export default function SIGNINForm() {
                 <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
               </svg>
             )}
-            <p className={cn(message.type === "error" ? "text-red-500" : "text-green-500")}>
+            <p
+              className={cn(
+                message.type === "error" ? "text-red-500" : "text-green-500"
+              )}
+            >
               {message.message}
             </p>
           </div>
         )}
 
-        <button className="bg-gradient-to-r from-[#501794] to-[#3E70A1] text-white w-full py-4 mt-4 rounded-lg text-lg font-poppins font-[800] transition-all duration-300 hover:opacity-80 active:opacity-100 focus:outline-2 focus:outline-white focus:outline-offset-2 active:outline-none active:scale-95" onClick={handleSubmit}>
-          Sign In
+        <button
+          className="bg-gradient-to-r from-[#501794] to-[#3E70A1] text-white w-full py-4 mt-4 rounded-lg text-lg font-poppins font-[800] transition-all duration-300 hover:opacity-80 active:opacity-100 focus:outline-2 focus:outline-white focus:outline-offset-2 active:outline-none active:scale-95"
+          onClick={handleSubmit}
+          disabled={loading}
+        >
+          {loading ? <Loader /> : "Sign In"}
         </button>
         <hr className="mt-4 md:mt-8 border-t border-[#727272]" />
         {/* <p className="mt-4 md:mt-8  text-white text-sm font-poppins font-[700]">
@@ -226,5 +251,66 @@ export default function SIGNINForm() {
         </p>
       </div>
     </div>
+  );
+}
+
+function Loader() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" className="w-full h-[44px]">
+      <circle
+        fill="#FFFFFF"
+        stroke="#FFFFFF"
+        stroke-width="15"
+        r="15"
+        cx="40"
+        cy="65"
+      >
+        <animate
+          attributeName="cy"
+          calcMode="spline"
+          dur="2"
+          values="65;135;65;"
+          keySplines=".5 0 .5 1;.5 0 .5 1"
+          repeatCount="indefinite"
+          begin="-.4"
+        ></animate>
+      </circle>
+      <circle
+        fill="#FFFFFF"
+        stroke="#FFFFFF"
+        stroke-width="15"
+        r="15"
+        cx="100"
+        cy="65"
+      >
+        <animate
+          attributeName="cy"
+          calcMode="spline"
+          dur="2"
+          values="65;135;65;"
+          keySplines=".5 0 .5 1;.5 0 .5 1"
+          repeatCount="indefinite"
+          begin="-.2"
+        ></animate>
+      </circle>
+      <circle
+        fill="#FFFFFF"
+        stroke="#FFFFFF"
+        stroke-width="15"
+        r="15"
+        cx="160"
+        cy="65"
+      >
+        <animate
+          attributeName="cy"
+          calcMode="spline"
+          dur="2"
+          values="65;135;65;"
+          keySplines=".5 0 .5 1;.5 0 .5 1"
+          repeatCount="indefinite"
+          begin="0"
+        ></animate>
+      </circle>
+    </svg>
   );
 }
