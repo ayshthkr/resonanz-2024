@@ -53,10 +53,21 @@ export default function SIGNINForm() {
         setLoading(false);
         return;
       }
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${await res.user.getIdToken()}`,
+        },
+      });
+
+      if (response.status === 200) {
+        router.push("/dashboard");
+      }
+
       setEmail("");
       setPassword("");
 
-      router.push("/dashboard");
+      setLoading(false);
       return;
     } catch (e) {
       console.error(e);
@@ -256,7 +267,11 @@ export default function SIGNINForm() {
 
 function Loader() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" className="w-full h-[44px]">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 200 200"
+      className="w-full h-[44px]"
+    >
       <circle
         fill="#FFFFFF"
         stroke="#FFFFFF"

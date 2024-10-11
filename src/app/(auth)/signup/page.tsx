@@ -6,8 +6,6 @@ export const metadata: Metadata = {
   description: "Sign up to create your account.",
 };
 
-
-
 export default function page() {
   return <SIGNIUPForm/>;
 }
