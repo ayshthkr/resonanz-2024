@@ -1,10 +1,10 @@
 import { useState } from "react"
-import { Button } from "./button"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "./dialog"
-import { Input } from "./input"
-import { Label } from "./label"
-import { ScrollArea } from "./scroll-area"
-import { Checkbox } from "./checkbox"
+import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { Checkbox } from "@/components/ui/checkbox"
 import { StepIndicator } from "./step-indicator"
 
 const availableEvents = [
