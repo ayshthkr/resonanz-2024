@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   Card,
@@ -78,8 +78,14 @@ const events = [
     mobile: "+1 (555) 147-2589",
   },
 ];
-
-export default function EventListing() {
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <EventListing />
+    </Suspense>
+  );
+}
+function EventListing() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
