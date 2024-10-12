@@ -89,20 +89,25 @@ export default function SIGNIUPForm() {
         return;
       }
 
-      fetch("/api/login", {
+      const response = await fetch("/api/login", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${await res.user.getIdToken()}`,
         },
-      }).then((response) => {
-        if (response.status === 200) {
-          router.push("/dashboard");
-        }
       });
+      if (response.status === 200) {
+        router.push("/dashboard");
+        return;
+      } else {
+        setMessage({
+          type: "error",
+          message: "Invalid Credentials",
+        });
+      }
 
       setEmail("");
       setPassword("");
-      router.push("/dashboard");
+      setLoading(false);
       return;
     } catch (e) {
       console.error(e);
@@ -306,6 +311,7 @@ export default function SIGNIUPForm() {
         <button
           className="bg-gradient-to-r from-[#501794] to-[#3E70A1] text-white w-full py-4 mt-4 rounded-lg text-lg font-poppins font-[800] transition-all duration-300 hover:opacity-80 active:opacity-100 focus:outline-2 focus:outline-white focus:outline-offset-2 active:outline-none active:scale-95"
           disabled={loading}
+          onClick={handleSubmit}
         >
           {loading ? <Loader /> : "Sign Up"}
         </button>

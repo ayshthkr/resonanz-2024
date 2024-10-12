@@ -62,6 +62,12 @@ export default function SIGNINForm() {
 
       if (response.status === 200) {
         router.push("/dashboard");
+        return;
+      } else {
+        setMessage({
+          type: "error",
+          message: "Invalid Credentials",
+        });
       }
 
       setEmail("");
